@@ -26,7 +26,8 @@ public class Controlador_FRM_Matricula implements ActionListener{
     
     public Controlador_FRM_Matricula(FRM_Estudiantes mantenimientoEstudiantes,FRM_Cursos mantenimientoCursos,FRM_Matricula frm_Matricula)
     {
-        this.metodosCursos=mantenimientoCursos.controlador.metodos;
+        
+        this.metodosCursos=mantenimientoCursos.controlador_FRM_Cursos.metodos;
         this.metodosEstudiantes=mantenimientoEstudiantes.controlador_FRM_Estudiantes.metodos;
         this.frm_Matricula=frm_Matricula;
         metodosMatricula=new MetodosMatricula();

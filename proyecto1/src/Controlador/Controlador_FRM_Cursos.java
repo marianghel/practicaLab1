@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controlador;
 
 import Modelo.ArchivoCurso;
@@ -9,14 +13,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Marianghel
+ */
 public class Controlador_FRM_Cursos implements ActionListener{
-    
-     FRM_Cursos frm_MantenimientoCursos;
+    FRM_Cursos mantenimientoCursos;
     public MetodosCursos metodos;
     ArchivoCurso archivo;
-    public Controlador_FRM_Cursos(FRM_Cursos frm_MantenimientoCursos)
+   
+    public Controlador_FRM_Cursos(FRM_Cursos mantenimientoCursos)
     {
-        this.frm_MantenimientoCursos= frm_MantenimientoCursos;
+        this.mantenimientoCursos= mantenimientoCursos;
         metodos = new MetodosCursos();
         archivo=new ArchivoCurso();
        cargaArchivoVentana();
@@ -26,7 +34,6 @@ public class Controlador_FRM_Cursos implements ActionListener{
         ArrayList <Curso> arrayTemporal=metodos.getArray();
         for(int contador=0;contador<arrayTemporal.size();contador++){
           this.archivo.ingresarInfoAlArchivo(arrayTemporal.get(contador));
-         
         }
     }
         public void cargaArchivoVentana(){
@@ -39,37 +46,48 @@ public class Controlador_FRM_Cursos implements ActionListener{
         }
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getActionCommand().equals("Agregar"))
-        {
-            metodos.agregarCurso(frm_MantenimientoCursos.devolverInformacion());   
-            metodos.mostrarInformacion();
-            this.frm_MantenimientoCursos.mostrarMensaje("Curso agregado");
-            frm_MantenimientoCursos.limpiar();
-            this.frm_MantenimientoCursos.estadoInicial();
-                    
-        }
         if(e.getActionCommand().equals("Buscar"))
         {
            buscar();
         }
+        if(e.getActionCommand().equals("Agregar"))
+        {
+            metodos.agregarCurso(mantenimientoCursos.devolverInformacion());   
+            metodos.mostrarInformacion();
+            this.mantenimientoCursos.mostrarMensaje("Curso agregado");
+            mantenimientoCursos.limpiarInterfaz();
+            this.mantenimientoCursos.estadoInicial();
+                    
+        }
+        
         if(e.getActionCommand().equals("Modificar"))
         {
-            metodos.modificarCurso(this.frm_MantenimientoCursos.devolverInformacion());
+            metodos.modificarCurso(this.mantenimientoCursos.devolverInformacion());
+            this.mantenimientoCursos.mostrarMensaje("Curso modificado");
+            this.mantenimientoCursos.limpiarInterfaz();
+           this.mantenimientoCursos.estadoInicial();
             
         }
         if(e.getActionCommand().equals("Eliminar"))
         {
-            
+            metodos.eliminarCurso(mantenimientoCursos.devolverInformacion());
+           this.mantenimientoCursos.mostrarMensaje("Curso eliminado");
+            this.mantenimientoCursos.limpiarInterfaz();
+           this.mantenimientoCursos.estadoInicial();
         }
     }
     public void buscar(){
-       if(metodos.consultarCurso(frm_MantenimientoCursos.devolverSigla()))
+       if(metodos.consultarCurso(mantenimientoCursos.devolverSigla()))
             {
-                frm_MantenimientoCursos.mostrarInformacion(metodos.getArregloInformacion());
+                 this.mantenimientoCursos.modificaElimina();
+                 this.mantenimientoCursos.mostrarMensaje("Curso encontrado");
+                mantenimientoCursos.mostrarInformacion(metodos.getArregloInformacion());
             }
             else
             {
-                System.out.println("No se encontró el curso");
+                  this.mantenimientoCursos.mostrarMensaje("Curso no encontrado");
+                   this.mantenimientoCursos.agregar();
+
             }
     }
 }

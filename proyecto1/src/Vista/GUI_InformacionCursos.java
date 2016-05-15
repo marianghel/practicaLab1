@@ -6,11 +6,10 @@
 package Vista;
 
 import Controlador.Controlador_FRM_Cursos;
-import Controlador.Controlador_FRM_Estudiantes;
 
 /**
  *
- * @author angelica
+ * @author Marianghel
  */
 public class GUI_InformacionCursos extends javax.swing.JPanel {
 
@@ -20,15 +19,15 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     Controlador_FRM_Cursos controlador;
     public GUI_InformacionCursos() {
         initComponents();
-        cargarCreditos();
-        estadoInicial();
+         cargarCreditos();
     }
-     public void agregarControlador(Controlador_FRM_Cursos controlador)
+
+      public void agregarControlador(Controlador_FRM_Cursos controlador)
     {
         this.controlador=controlador;
         
         }
-    public void cargarCreditos()
+      public void cargarCreditos()
     {
         this.jcb_Creditos.removeAllItems();
         for(int contador=0;contador<10;contador++)
@@ -83,7 +82,6 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     this.jcb_Creditos.setEnabled(true);
     this.jt_Nombre.setEnabled(true);
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,25 +92,25 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     private void initComponents() {
 
         jl_Sigla = new javax.swing.JLabel();
-        jl_Nombre = new javax.swing.JLabel();
         jl_Creditos = new javax.swing.JLabel();
+        jl_NombreCurso = new javax.swing.JLabel();
         jl_Horario = new javax.swing.JLabel();
         jt_Sigla = new javax.swing.JTextField();
         jt_Nombre = new javax.swing.JTextField();
-        jt_Horario = new javax.swing.JTextField();
         jcb_Creditos = new javax.swing.JComboBox<>();
+        jt_Horario = new javax.swing.JTextField();
 
         jl_Sigla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jl_Sigla.setText("Sigla:");
-
-        jl_Nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jl_Nombre.setText("Nombre:");
+        jl_Sigla.setText("Sigla");
 
         jl_Creditos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jl_Creditos.setText("Créditos:");
+        jl_Creditos.setText("Créditos");
+
+        jl_NombreCurso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jl_NombreCurso.setText("Nombre curso");
 
         jl_Horario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jl_Horario.setText("Horario:");
+        jl_Horario.setText("Horario");
 
         jt_Sigla.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -120,56 +118,59 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
             }
         });
 
+        jt_Nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         jcb_Creditos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jt_Horario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jl_Creditos)
-                            .addComponent(jl_Sigla, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jl_Horario, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jt_Sigla, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jt_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                            .addComponent(jt_Horario)
-                            .addComponent(jcb_Creditos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jl_Nombre))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(jl_Sigla)
+                    .addComponent(jl_NombreCurso)
+                    .addComponent(jl_Creditos)
+                    .addComponent(jl_Horario))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jt_Nombre)
+                        .addComponent(jcb_Creditos, 0, 192, Short.MAX_VALUE)
+                        .addComponent(jt_Horario))
+                    .addComponent(jt_Sigla, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jt_Sigla, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_Sigla))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_Nombre)
-                    .addComponent(jt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jl_Creditos, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_Creditos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                    .addComponent(jl_Sigla)
+                    .addComponent(jt_Sigla, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_Horario)
-                    .addComponent(jt_Horario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                    .addComponent(jl_NombreCurso)
+                    .addComponent(jt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_Creditos)
+                    .addComponent(jcb_Creditos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jt_Horario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_Horario))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jt_SiglaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglaKeyPressed
-       if(evt.getKeyCode()==10){
-           controlador.buscar();
-       }
+        if(evt.getKeyCode()==10){
+           controlador.buscar(); 
+        }
     }//GEN-LAST:event_jt_SiglaKeyPressed
 
 
@@ -177,7 +178,7 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcb_Creditos;
     private javax.swing.JLabel jl_Creditos;
     private javax.swing.JLabel jl_Horario;
-    private javax.swing.JLabel jl_Nombre;
+    private javax.swing.JLabel jl_NombreCurso;
     private javax.swing.JLabel jl_Sigla;
     private javax.swing.JTextField jt_Horario;
     private javax.swing.JTextField jt_Nombre;

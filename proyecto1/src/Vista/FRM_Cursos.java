@@ -4,48 +4,48 @@ package Vista;
 import Controlador.Controlador_FRM_Cursos;
 import javax.swing.JOptionPane;
 
-
 public class FRM_Cursos extends javax.swing.JFrame {
- public Controlador_FRM_Cursos controlador;
+
+    public Controlador_FRM_Cursos controlador_FRM_Cursos;
     public FRM_Cursos() {
         initComponents();
-         controlador = new Controlador_FRM_Cursos(this);
-        this.gUI_Botones2.agregarEventos(controlador);
-       
+        setLocation(250,150);
+        controlador_FRM_Cursos = new Controlador_FRM_Cursos(this);
+        gUI_Botones2.agregarEventos(controlador_FRM_Cursos);
+      this.gUI_InformacionCursos2.agregarControlador(controlador_FRM_Cursos);
         estadoInicial();
     }
-     public String[] devolverInformacion()
+
+       public String[] devolverInformacion()
     {
-        return this.gUI_InformacionCursos1.devolverInformacion();
+        return this.gUI_InformacionCursos2.devolverInformacion();
     }
-    public String devolverSigla()
-    {
-        return this.gUI_InformacionCursos1.devolverSigla();
+    public String devolverSigla(){
+          return this.gUI_InformacionCursos2.devolverSigla();
     }
+       
     public void mostrarInformacion(String arreglo[])
     {
-        this.gUI_InformacionCursos1.mostrarInformacion(arreglo);
+        this.gUI_InformacionCursos2.mostrarInformacion(arreglo);
     }
-    
-        public void limpiar(){
-        this.gUI_InformacionCursos1.limpiarInterfaz();
+     public void estadoInicial(){
+        this.gUI_InformacionCursos2.estadoInicial();
+        this.gUI_Botones2.estadoInicial();
+    }
+     public void mostrarMensaje(String mensaje){
+       JOptionPane.showMessageDialog(null,mensaje);
+   }
+    public void limpiarInterfaz(){
+        this.gUI_InformacionCursos2.limpiarInterfaz();
     }
     public void agregar(){
-        this.gUI_InformacionCursos1.habilitarNoExiste();
+        this.gUI_InformacionCursos2.habilitarNoExiste();
         this.gUI_Botones2.habilitarAgregar();
     }
     public void modificaElimina(){
-        this.gUI_InformacionCursos1.hablilitarSiExiste();
         this.gUI_Botones2.habilitarExistencia();
+        this.gUI_InformacionCursos2.hablilitarSiExiste();
     }
-    public void estadoInicial(){
-        this.gUI_InformacionCursos1.estadoInicial();
-        this.gUI_Botones2.estadoInicial();
-    }
-      public void mostrarMensaje(String mensaje){
-       JOptionPane.showMessageDialog(null,mensaje);
-   }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,8 +55,7 @@ public class FRM_Cursos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gUI_InformacionCursos1 = new Vista.GUI_InformacionCursos();
-        jl_Titulo = new javax.swing.JLabel();
+        gUI_InformacionCursos2 = new Vista.GUI_InformacionCursos();
         gUI_Botones2 = new Vista.GUI_Botones();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -64,51 +63,20 @@ public class FRM_Cursos extends javax.swing.JFrame {
                 formComponentHidden(evt);
             }
         });
-
-        jl_Titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jl_Titulo.setText("Registro cursos");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(gUI_Botones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(380, 380, 380))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jl_Titulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(gUI_InformacionCursos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jl_Titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(gUI_InformacionCursos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(gUI_Botones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-        );
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(gUI_InformacionCursos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(gUI_Botones2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 317, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-      controlador.agregarInformacionAlArchivo();
+     controlador_FRM_Cursos.agregarInformacionAlArchivo();
     }//GEN-LAST:event_formComponentHidden
 
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Vista.GUI_Botones gUI_Botones2;
-    private Vista.GUI_InformacionCursos gUI_InformacionCursos1;
-    private javax.swing.JLabel jl_Titulo;
+    private Vista.GUI_InformacionCursos gUI_InformacionCursos2;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,7 +33,7 @@ public class ArchivoCurso {
         try{
             archivoSalida= new ObjectOutputStream(new FileOutputStream("curso.dat"));
         }catch(IOException ex){
-            System.out.println("Error al crear archivo de curso");
+            System.out.println("Error al crear archivo de curso" + ex);
         }
     }
     
