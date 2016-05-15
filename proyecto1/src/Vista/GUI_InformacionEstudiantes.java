@@ -14,9 +14,8 @@ public class GUI_InformacionEstudiantes extends javax.swing.JPanel {
     }
     public void agregarControlador(Controlador_FRM_Estudiantes controlador)
     {
-        this.controlador=controlador;
-        
-        }
+        this.controlador=controlador; 
+    }
     public String[] devolverInformacion()
     {
         String arreglo[];

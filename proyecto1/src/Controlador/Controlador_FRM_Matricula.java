@@ -21,6 +21,7 @@ public class Controlador_FRM_Matricula implements ActionListener{
     MetodosEstudiantes metodosEstudiantes;
     MetodosMatricula metodosMatricula;
     FRM_Matricula frm_Matricula;
+    
     boolean encontroEstudiante=false; 
     boolean encontroCurso=false;
     
@@ -82,6 +83,7 @@ public class Controlador_FRM_Matricula implements ActionListener{
         {
             frm_Matricula.habilitarAgregar();
         }
+       
     }
     public String colocarCodigo()
     {

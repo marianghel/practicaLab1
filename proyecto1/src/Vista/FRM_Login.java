@@ -15,7 +15,7 @@ public class FRM_Login extends javax.swing.JFrame {
        
          this.gUI_InformacionLogin1.agregarControladorPrincipal(controlador);
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

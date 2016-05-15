@@ -91,7 +91,7 @@ public class GUI_InformacionLogin extends javax.swing.JPanel {
 
     private void jt_NombreUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_NombreUsuarioKeyPressed
         if(evt.getKeyCode()==10){
-            controladorP.confirmandoUsuario(devolverInformacion());
+            controladorP.confirmandoUsuario(devolverInformacion()); 
         }
     }//GEN-LAST:event_jt_NombreUsuarioKeyPressed
 

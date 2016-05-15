@@ -4,6 +4,7 @@ package Controlador;
 import Modelo.ArchivoUsuario;
 import Vista.FRM_Cursos;
 import Vista.FRM_Estudiantes;
+import Vista.FRM_FuenteInformacion;
 import Vista.FRM_Login;
 import Vista.FRM_Matricula;
 import Vista.FRM_MenuPrincipal;
@@ -21,17 +22,20 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
     FRM_Login login;
     FRM_MenuPrincipal ventana;
     FRM_Usuario ventanaUsuario;
+    FRM_FuenteInformacion mantenimientoFuente;
     
     public Controlador_FRM_MenuPrincipal(FRM_MenuPrincipal ventana)
-    {
+    { 
         this.ventana=ventana;
         mantenimientoEstudiantes=new FRM_Estudiantes();
         mantenimientoCursos=new FRM_Cursos();
+        mantenimientoFuente= new FRM_FuenteInformacion(this);
         matricula= new FRM_Matricula(mantenimientoEstudiantes,mantenimientoCursos);
         archivoUsuario=new ArchivoUsuario();
         login=new FRM_Login(this);
         ventanaUsuario=new FRM_Usuario();
-        accesoVentana();
+        
+       mantenimientoFuente.setVisible(true);
     }
     public void cierreUsuario(){
         login.setVisible(true);
@@ -49,7 +53,7 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
              ventanaUsuario.setVisible(true);  
             System.out.println("abriendo modulo usuario");
             
-            accesoVentana();
+            accesoArchivoMenu();
             }else{
                login.setVisible(true);
               
@@ -75,7 +79,7 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
        }
         return acceso;
     }
-    public void accesoVentana(){
+    public void accesoArchivoMenu(){
         if(archivoUsuario.cargarArchivo()){
             login.setVisible(true);
             System.out.println("login"); 
@@ -84,6 +88,16 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
              System.out.println("usuario");
         }
     }
+      public void accesoLogin(){
+      if(this.mantenimientoFuente.devolverArchivo()) {
+         mantenimientoFuente.setVisible(false); 
+        login.setVisible(true);
+      }
+      /*if(this.mantenimientoFuente.devolverBasesDatos){
+        
+      */
+         }
+    
     
    public void actionPerformed(ActionEvent e)
     {
@@ -104,7 +118,13 @@ public class Controlador_FRM_MenuPrincipal implements ActionListener{
            this.matricula.setVisible(true);
             this.matricula.colocarCodigo();
         }
-    
+          if(e.getActionCommand().equals("Aceptar")){
+              System.out.println("aceptar");
+            this.mantenimientoFuente.mensajeOpcion();
+            accesoLogin();
+        }
+    }
+
     }
     
-}
+
