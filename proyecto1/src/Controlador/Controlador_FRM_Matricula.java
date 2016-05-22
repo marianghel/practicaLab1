@@ -85,9 +85,12 @@ public void agregarInformacionAlArchivo() {
             //Archovo plano    
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1)
             {
-                this.buscarEstudiante();
-                
+                this.buscarEstudianteArchivoPlano();
             }
+              //Bases de datos    
+            if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1)
+            {
+        }
         }
         if (e.getActionCommand().equals("ConsultaRapidaCurso")) 
         {
@@ -95,9 +98,11 @@ public void agregarInformacionAlArchivo() {
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1)
             {
                 this.buscarCurso();
+                
             }
         }
          habilitarAgregar();
+        
 //Botones--------------------------------------------------------
         if (e.getActionCommand().equals("Agregar")) {
             //Archivo plano
@@ -122,7 +127,9 @@ public void agregarInformacionAlArchivo() {
            if (e.getActionCommand().equals("Modificar")) {
             //Archivo plano
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
-
+                   frm_Matricula. modificarTabla();
+                   //metodos.modificarEstudiante(devolverInformacion());
+                   frm_Matricula.estadoInicial();
             }
         }
         if (e.getActionCommand().equals("Buscar")) {
@@ -132,6 +139,7 @@ public void agregarInformacionAlArchivo() {
                     String arreglo[]=metodosMatricula.getArregloInformacion();
                      frm_Matricula.mostrarNombreEstudiante(arreglo[0]);
                      frm_Matricula.mostrarNombreCurso(arreglo[1]);
+                     frm_Matricula.modificarElimina();
                      
                      //tocar
                      String cedula="";
@@ -164,6 +172,7 @@ public void agregarInformacionAlArchivo() {
                 //Archivo plano
              if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
                  frm_Matricula.eliminarTabla();
+                 frm_Matricula.estadoInicial();
              }
 
             }
@@ -174,7 +183,7 @@ public void agregarInformacionAlArchivo() {
                 frm_Matricula.habilitarAgregar();
             }
         }
-        public boolean buscarEstudiante() {
+        public boolean buscarEstudianteArchivoPlano() {
 
             if (metodosEstudiantes.consultarEstudiante(frm_Matricula.devolverCedula())) {
                 String arreglo[] = metodosEstudiantes.getArregloInformacion();
@@ -185,6 +194,10 @@ public void agregarInformacionAlArchivo() {
             }
             return encontroEstudiante;
         }
+        
+     /*   public boolean buscarEstudianteBaseDatos(){
+            if(controladorP.conexion.)
+        }*/
 
         public boolean buscarCurso() {
             if (metodosCursos.consultarCurso(frm_Matricula.devolverSigla())) {
@@ -196,6 +209,7 @@ public void agregarInformacionAlArchivo() {
             }
             return encontroCurso;
         }
+      
         
         public void finalizar() {
             for (int contador = 0; contador < frm_Matricula.getCantidadDeCursosMatriculados(); contador++) {
