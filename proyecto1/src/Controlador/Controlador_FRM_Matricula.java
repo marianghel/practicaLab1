@@ -303,14 +303,16 @@ public void agregar() {
                     String cedula = "";
                     String sigla = "";
                     String arregloTabla[] = new String[4];
-                    for (int contador = 0; contador < arrayMatricula.size(); contador++) {
-                        if (arrayMatricula.get(contador).getCodigo().equals(frm_Matricula.devolverCodigo())) {
+                        for (int contador = 0; contador < arrayMatricula.size(); contador++)
+                        {
+                            if (arrayMatricula.get(contador).getCodigo().equals(frm_Matricula.devolverCodigo())) 
+                            {
                             arregloTabla[0] = this.arrayMatricula.get(contador).getCedula();
                             arregloTabla[2] = this.arrayMatricula.get(contador).getSigla();
                             cedula = arregloTabla[0];
                             sigla = arregloTabla[2];
+                            }
                         }
-                    
                     arregloTabla[0] = arregloMatricula[0];
                     arregloTabla[1] = arregloEstudiante[1];
                     arregloTabla[2] = arregloMatricula[1];
@@ -318,12 +320,13 @@ public void agregar() {
 
                     modelo.addRow(arregloTabla);
                     frm_Matricula.tbl_Matricula.setModel(modelo);
-                    }
+                        
                     frm_Matricula.modificarElimina();
                     frm_Matricula.mostrarMensaje("Matricula encontrada en el archivo plano");
-                }
+                    }else{
                     frm_Matricula.estadoInicial();
                     frm_Matricula.mostrarMensaje("Matricula no encontrada en el archivo plano");
+                    }
             }
             
 //FINALIZAR---------------------------------------------------------------------
@@ -352,9 +355,7 @@ public void agregar() {
     public void eliminarMatricula(){
      //Archivo plano
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
-                this.eliminarTabla();
-               metodosMatricula.eliminarMatricula(frm_Matricula.devolverInformacion());
-                //frm_Matricula.eliminarTabla();
+                metodosMatricula.eliminarMatricula(frm_Matricula.devolverInformacion());
                 frm_Matricula.estadoInicial();
             }
             //Base de datos
@@ -373,9 +374,7 @@ public void agregar() {
         int numeroFila = frm_Matricula.tbl_Matricula.getSelectedRow();
 
         if (numeroFila < 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Debe seleccionar una fila de la tabla");
-
+          
         } else {
             int confirmar = JOptionPane.showConfirmDialog(null,
                     "Esta seguro que desea Eliminar el registro? ");
