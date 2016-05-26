@@ -63,11 +63,11 @@ public class ArchivoMatricula {
     }
     
     
-    public ArrayList<Estudiante> devolverInformacionDelArchivo(){//devuelve el array del archivo
-        ArrayList <Estudiante> array= new ArrayList<Estudiante>();
+    public ArrayList<Matricula> devolverInformacionDelArchivo(){//devuelve el array del archivo
+        ArrayList <Matricula> array= new ArrayList<Matricula>();
         try{
             while(true){
-                array.add((Estudiante)archivoEntrada.readObject());
+                array.add((Matricula)archivoEntrada.readObject());
             }
         }
         catch(Exception e){

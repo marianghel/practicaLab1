@@ -20,6 +20,12 @@ public class GUI_InformacionLogin extends javax.swing.JPanel {
         return arreglo;
     }
   
+    public String devolverUsuario(){
+        return this.jt_NombreUsuario.getText();
+    }
+    public String devolverContrasena(){
+        return this.jt_Contrasena.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,13 +97,15 @@ public class GUI_InformacionLogin extends javax.swing.JPanel {
 
     private void jt_NombreUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_NombreUsuarioKeyPressed
         if(evt.getKeyCode()==10){
-            controladorP.confirmandoUsuario(devolverInformacion()); 
+           // controladorP.confirmandoUsuario(devolverInformacion()); 
+           
         }
     }//GEN-LAST:event_jt_NombreUsuarioKeyPressed
 
     private void jt_ContrasenaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_ContrasenaKeyPressed
         if(evt.getKeyCode()==10){
-            controladorP.confirmandoUsuario(devolverInformacion());
+            controladorP.opcionConfirmar();
+            //controladorP.confirmandoUsuario(devolverInformacion());
         }
     }//GEN-LAST:event_jt_ContrasenaKeyPressed
 

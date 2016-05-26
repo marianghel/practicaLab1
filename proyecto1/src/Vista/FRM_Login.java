@@ -11,10 +11,20 @@ public class FRM_Login extends javax.swing.JFrame {
     public FRM_Login(Controlador_FRM_MenuPrincipal controlador) {
         initComponents();
         
-       setLocation(160,150);
+        setLocationRelativeTo(null);
        
          this.gUI_InformacionLogin1.agregarControladorPrincipal(controlador);
     }
+  public String[] devolverInformacion(){
+    return  this.gUI_InformacionLogin1.devolverInformacion();
+  }
+  public String devolverContrasena(){
+      return this.gUI_InformacionLogin1.devolverContrasena();
+  }
+  public String devolverUsuario(){
+      return this.gUI_InformacionLogin1.devolverUsuario();
+  }
+  
   
     /**
      * This method is called from within the constructor to initialize the form.

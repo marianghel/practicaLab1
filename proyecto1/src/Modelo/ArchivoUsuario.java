@@ -20,7 +20,7 @@ public class ArchivoUsuario {
     ObjectOutputStream archivoSalida;//crea y escribe
     
     public ArchivoUsuario(){
-        if(cargarArchivo()){
+        if(verificarDatosArchivo()){
             System.out.println("carga archivo correcta");
         }else{
             System.out.println("carga archivo incorrecta");
@@ -39,7 +39,7 @@ public class ArchivoUsuario {
         }
         return login;
     }
-public boolean cargarArchivo(){
+public boolean verificarDatosArchivo(){
         boolean carga=false;
         try{
           archivoEntrada=new  ObjectInputStream(new FileInputStream("archivoUsuario.dat"));

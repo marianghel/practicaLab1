@@ -19,7 +19,7 @@ public class FRM_FuenteInformacion extends javax.swing.JFrame {
     Controlador_FRM_MenuPrincipal controladorP;
     public FRM_FuenteInformacion(Controlador_FRM_MenuPrincipal controladorP) {
         initComponents();
-        setLocation(270,150);
+        this.setLocationRelativeTo(null);
         this.gUI_InformacionFuente1.agregarEvento(controladorP);
         this.gUI_InformacionFuente1.agregarControlador(controladorP);
     }
@@ -27,16 +27,12 @@ public class FRM_FuenteInformacion extends javax.swing.JFrame {
     public void mensajeOpcion(){
         this.gUI_InformacionFuente1.mensaje();
     }
-    public boolean devolverArchivo(){
-      return this.gUI_InformacionFuente1.opcionArchivo();
-    }
-    public boolean devolverBD(){
-      return  this.gUI_InformacionFuente1.opcionBaseDatos();
-        
-    }
-    public boolean devolverXML(){
-       return this.gUI_InformacionFuente1.opcionXML();
-    }
+   public int devolverOpcionFuente(){
+       System.out.println("opcion fuente");
+       return this.gUI_InformacionFuente1.opcionFuente();
+      
+   }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

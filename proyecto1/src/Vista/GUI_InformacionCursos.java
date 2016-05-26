@@ -17,71 +17,87 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
      * Creates new form GUI_InformacionCursos
      */
     Controlador_FRM_Cursos controlador;
+
     public GUI_InformacionCursos() {
         initComponents();
-         cargarCreditos();
+        cargarCreditos();
     }
 
-      public void agregarControlador(Controlador_FRM_Cursos controlador)
-    {
-        this.controlador=controlador;
-        
-        }
-      public void cargarCreditos()
-    {
+    public void agregarControlador(Controlador_FRM_Cursos controlador) {
+        this.controlador = controlador;
+
+    }
+
+    public void cargarCreditos() {
         this.jcb_Creditos.removeAllItems();
-        for(int contador=0;contador<10;contador++)
-        {
-            this.jcb_Creditos.addItem(""+contador);
+        for (int contador = 0; contador < 10; contador++) {
+            this.jcb_Creditos.addItem("" + contador);
         }
         this.jcb_Creditos.setSelectedIndex(4);
     }
-    public String[] devolverInformacion()
-    {
+
+    public String[] devolverInformacion() {
         String arreglo[];
-        arreglo=new String[4];
-        arreglo[0]=this.jt_Sigla.getText();
-        arreglo[1]=this.jt_Nombre.getText();
-        arreglo[2]=""+this.jcb_Creditos.getSelectedIndex();
-        arreglo[3]=this.jt_Horario.getText();
-        
+        arreglo = new String[4];
+        arreglo[0] = this.jt_Sigla.getText();
+        arreglo[1] = this.jt_Nombre.getText();
+        arreglo[2] = "" + this.jcb_Creditos.getSelectedIndex();
+        arreglo[3] = this.jt_Horario.getText();
+
         return arreglo;
-    
+
     }
-    public String devolverSigla()
-    {
+
+    public String devolverSigla() {
         return this.jt_Sigla.getText();
     }
-    public void mostrarInformacion(String arreglo[])
-    {
-        this.jt_Nombre.setText(arreglo[0]);
-        this.jcb_Creditos.setSelectedIndex(Integer.parseInt(arreglo[1]));
-        this.jt_Horario.setText(arreglo[2]);
+
+    public String devolverNombre() {
+        return this.jt_Nombre.getText();
     }
-    
-          public void limpiarInterfaz(){
-  this.jt_Nombre.setText("");
-    this.jt_Horario.setText("");
-    this.jt_Sigla.setText("");
-}
-    public void estadoInicial(){
-     this.jt_Sigla.setEnabled(true);
-    this.jt_Nombre.setEnabled(false);
-    this.jt_Horario.setEnabled(false);
-    this.jcb_Creditos.setEnabled(false);
-}
-    public void hablilitarSiExiste(){
-     this.jt_Sigla.setEnabled(false);
-    this.jt_Horario.setEnabled(true);
-    this.jcb_Creditos.setEnabled(true);
-    this.jt_Nombre.setEnabled(true);
-}
-    public void habilitarNoExiste(){
-    this.jt_Sigla.setEnabled(true);
-    this.jt_Horario.setEnabled(true);
-    this.jcb_Creditos.setEnabled(true);
-    this.jt_Nombre.setEnabled(true);
+
+    public int devolverCreditos() {
+        return this.jcb_Creditos.getSelectedIndex();
     }
+
+    public String devolverHorario() {
+        return this.jt_Horario.getText();
+    }
+
+    public void mostrarInformacion(String arreglo[]) {
+        this.jt_Sigla.setText(arreglo[0]);
+        this.jt_Nombre.setText(arreglo[1]);
+        this.jcb_Creditos.setSelectedIndex(Integer.parseInt(arreglo[2]));
+        this.jt_Horario.setText(arreglo[3]);
+    }
+
+    public void limpiarInterfaz() {
+        this.jt_Nombre.setText("");
+        this.jt_Horario.setText("");
+        this.jt_Sigla.setText("");
+    }
+
+    public void estadoInicial() {
+        this.jt_Sigla.setEnabled(true);
+        this.jt_Nombre.setEnabled(false);
+        this.jt_Horario.setEnabled(false);
+        this.jcb_Creditos.setEnabled(false);
+    }
+
+    public void hablilitarSiExiste() {
+        this.jt_Sigla.setEnabled(false);
+        this.jt_Horario.setEnabled(true);
+        this.jcb_Creditos.setEnabled(true);
+        this.jt_Nombre.setEnabled(true);
+    }
+
+    public void habilitarNoExiste() {
+        this.jt_Sigla.setEnabled(true);
+        this.jt_Horario.setEnabled(true);
+        this.jcb_Creditos.setEnabled(true);
+        this.jt_Nombre.setEnabled(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,8 +184,8 @@ public class GUI_InformacionCursos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jt_SiglaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_SiglaKeyPressed
-        if(evt.getKeyCode()==10){
-           controlador.buscar(); 
+        if (evt.getKeyCode() == 10) {
+            controlador.buscar();
         }
     }//GEN-LAST:event_jt_SiglaKeyPressed
 

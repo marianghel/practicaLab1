@@ -43,8 +43,8 @@ public class Controlador_FRM_Matricula implements ActionListener {
     public ArrayList<Estudiante> arrayEstudiantes;
     public ArrayList<Curso> arrayCursos;
 
-    boolean encontroEstudiante = false;
-    boolean encontroCurso = false;
+   public boolean encontroEstudiante = false;
+   public boolean encontroCurso = false;
 
     public Controlador_FRM_Matricula(FRM_Estudiantes mantenimientoEstudiantes, FRM_Cursos mantenimientoCursos, FRM_Matricula frm_Matricula, Controlador_FRM_MenuPrincipal controladorP) {
         this.metodosCursos = mantenimientoCursos.controlador_FRM_Cursos.metodos;
@@ -169,16 +169,16 @@ public class Controlador_FRM_Matricula implements ActionListener {
             }
 
         if (e.getActionCommand().equals("Modificar")) {
-            //Archivo plano
-            if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
+             //Archivo plano//baseDatos//Xml. solo agrega a la tabla
+
+            if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1
+                    || controladorP.mantenimientoFuente.devolverOpcionFuente() == 2
+                    || controladorP.mantenimientoFuente.devolverOpcionFuente() == 3) {
+                
                 frm_Matricula.resetearInterfaz();
                 frm_Matricula.habilitarAgregar();
                 frm_Matricula.estadoInicial();
             }
-            //base de datos
-             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 2) {
-                 controladorP.conexion.eliminarMatricula(frm_Matricula.devolverCodigo());
-             }
         }
         if (e.getActionCommand().equals("Buscar")) {
             frm_Matricula.soloLimpiaTabla();
@@ -188,44 +188,26 @@ public class Controlador_FRM_Matricula implements ActionListener {
             }
             //Base de datos
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 2) {
-                if (controladorP.conexion.consultarMatricula(frm_Matricula.devolverCodigo())) {
-                    String arregloMatricula[] = controladorP.conexion.devolverArregloMatricula();
-                    controladorP.conexion.consultarEstudiante(arregloMatricula[0]);
-                    String arregloEstudiante[] = controladorP.conexion.getArreglo();
-                    controladorP.conexion.consultarCurso(arregloMatricula[1]);
-                    String arregloCurso[] = controladorP.conexion.getArregloCurso();
-                    frm_Matricula.mostrarNombreEstudiante(arregloEstudiante[1]);
-                    frm_Matricula.mostrarNombreCurso(arregloCurso[1]);
-                    frm_Matricula.modificarElimina();
-                    //TABLA
-                    String cedula = "";
-                    String sigla = "";
-                    String arregloTabla[] = new String[4];
-                    for (int contador = 0; contador < arrayMatricula.size(); contador++) {
-                        if (arrayMatricula.get(contador).getCodigo().equals(frm_Matricula.devolverCodigo())) {
-                            arregloTabla[0] = this.arrayMatricula.get(contador).getCedula();
-                            arregloTabla[2] = this.arrayMatricula.get(contador).getSigla();
-                            cedula = arregloTabla[0];
-                            sigla = arregloTabla[2];
-                        }
-                    }
-                    arregloTabla[0] = arregloMatricula[0];
-                    arregloTabla[1] = arregloEstudiante[1];
-                    arregloTabla[2] = arregloMatricula[1];
-                    arregloTabla[3] = arregloCurso[1];
-                    modelo.addRow(arregloTabla);
-                    frm_Matricula.tbl_Matricula.setModel(modelo);
-                }
-                frm_Matricula.resetearInterfaz();
+               consultaMatriculaBaseDatos();
             }
         }
         
         if (e.getActionCommand().equals("Eliminar")) {
-        eliminarTabla();
-        eliminarMatricula();
-        frm_Matricula.resetearInterfaz();
+          //Archivo Plano
+        if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
+            eliminarTabla();
+            eliminarMatricula();
+            frm_Matricula.resetearInterfaz();
          }
+        //Base de datos
+        if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 2) {
+            eliminarTabla();
+            controladorP.conexion.eliminarMatricula(frm_Matricula.devolverCodigo());
+            frm_Matricula.resetearInterfaz();
+        }
+        }
     }
+    
 //Metodos-----------------------------------------------------------------
 public boolean revisarRepeticionEstudianteTabla(String codigo){
             boolean revisar=false;
@@ -260,6 +242,7 @@ public void agregar() {
         if (controladorP.conexion.consultarEstudiante(frm_Matricula.devolverCedula())) {
             String arregloEstudiante[] = controladorP.conexion.getArreglo();
             frm_Matricula.mostrarNombreEstudiante(arregloEstudiante[1]);
+            encontroEstudiante = true;
         } else {
             frm_Matricula.mostrarMensaje("El estudiante consultado no se encuentra registrado en la base de datos");
         }
@@ -327,8 +310,39 @@ public void agregar() {
                     frm_Matricula.estadoInicial();
                     frm_Matricula.mostrarMensaje("Matricula no encontrada en el archivo plano");
                     }
-            }
-            
+     
+     }
+     public void consultaMatriculaBaseDatos(){
+     if (controladorP.conexion.consultarMatricula(frm_Matricula.devolverCodigo())) {
+                    String arregloMatricula[] = controladorP.conexion.devolverArregloMatricula();
+                    controladorP.conexion.consultarEstudiante(arregloMatricula[0]);
+                    String arregloEstudiante[] = controladorP.conexion.getArreglo();
+                    controladorP.conexion.consultarCurso(arregloMatricula[1]);
+                    String arregloCurso[] = controladorP.conexion.getArregloCurso();
+                    frm_Matricula.mostrarNombreEstudiante(arregloEstudiante[1]);
+                    frm_Matricula.mostrarNombreCurso(arregloCurso[1]);
+                    frm_Matricula.modificarElimina();
+                    //TABLA
+                    String cedula = "";
+                    String sigla = "";
+                    String arregloTabla[] = new String[4];
+                    for (int contador = 0; contador < arrayMatricula.size(); contador++) {
+                        if (arrayMatricula.get(contador).getCodigo().equals(frm_Matricula.devolverCodigo())) {
+                            arregloTabla[0] = this.arrayMatricula.get(contador).getCedula();
+                            arregloTabla[2] = this.arrayMatricula.get(contador).getSigla();
+                            cedula = arregloTabla[0];
+                            sigla = arregloTabla[2];
+                        }
+                    }
+                    arregloTabla[0] = arregloMatricula[0];
+                    arregloTabla[1] = arregloEstudiante[1];
+                    arregloTabla[2] = arregloMatricula[1];
+                    arregloTabla[3] = arregloCurso[1];
+                    modelo.addRow(arregloTabla);
+                    frm_Matricula.tbl_Matricula.setModel(modelo);
+                }
+                frm_Matricula.resetearInterfaz(); 
+     }
 //FINALIZAR---------------------------------------------------------------------
     public void finalizarArchivosPlanos() {
         for (int contador = 0; contador < frm_Matricula.getCantidadDeCursosMatriculados(); contador++) {

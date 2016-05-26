@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class MetodosEstudiantes {
     
-    private ArrayList <Estudiante> arrayEstudiantes;
-    String arregloInformacionConsultada[]=new String[2];
+    public ArrayList <Estudiante> arrayEstudiantes;
+    String arregloInformacionConsultada[]=new String[3];
        public void setArray(ArrayList <Estudiante> array){
      this.arrayEstudiantes= array;
 }
@@ -48,8 +48,9 @@ public class MetodosEstudiantes {
         {
             if(arrayEstudiantes.get(contador).getCedula().equals(cedula))
             {
-                arregloInformacionConsultada[0]=arrayEstudiantes.get(contador).getNombre();
-                arregloInformacionConsultada[1]=arrayEstudiantes.get(contador).getDireccion();
+                arregloInformacionConsultada[0]=arrayEstudiantes.get(contador).getCedula();
+                arregloInformacionConsultada[1]=arrayEstudiantes.get(contador).getNombre();
+                arregloInformacionConsultada[2]=arrayEstudiantes.get(contador).getDireccion();
                 existe=true;
             }
         

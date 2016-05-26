@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class FRM_Matricula extends javax.swing.JFrame {
 
-    DefaultTableModel modelo;
+    public DefaultTableModel modelo;
     Controlador_FRM_Matricula controlador;
     String arregloMatricula[];
     
@@ -21,24 +21,39 @@ public class FRM_Matricula extends javax.swing.JFrame {
         this.tbl_Matricula.setModel(modelo);
         colocarTitulosTabla(); 
         agregarEventos(controlador);
-        agregarControlador(controlador);
         gUI_Botones1.estadoInicial();
+    }
+    public String[] devolverInformacion(){
+        String arreglo[];
+        arreglo=new String[3];
+        arreglo[0]=this.jt_CodigoMatricula.getText();
+        arreglo[1]=this.jt_Cedula.getText();
+        arreglo[2]=this.jt_Sigla.getText();
+        return arreglo;
     }
     public void habilitarAgregar()
     {
         this.gUI_Botones1.habilitarAgregar();
     }
+    public void inhabilitarAgregar(){
+        this.gUI_Botones1.inhabilitarAgregar();
+    }
+    public void modificarElimina()
+    {
+        this.gUI_Botones1.habilitarExistencia();
+    }
     public void estadoInicial()
     {
         this.gUI_Botones1.estadoInicial();
     }
-    public void limpiarCurso()
+    public void limpiarEspaciosConsulta()
     {
         this.jt_Sigla.setText("");
         this.jt_Cedula.setText("");
     }
     public void cargarTabla()
     {
+        System.out.println("carga tabla");
         String arregloMatricula[]=new String[4];
         arregloMatricula[0]=this.jt_Cedula.getText();
         arregloMatricula[1]=this.jt_NombreEstudiante.getText();
@@ -47,38 +62,34 @@ public class FRM_Matricula extends javax.swing.JFrame {
         
         modelo.addRow(arregloMatricula);
     }
-    public String devolverCedula()
-    {
-        return this.jt_Cedula.getText();
-    }
     
     public void mostrarNombreEstudiante(String nombre)
     {
         this.jt_NombreEstudiante.setText(nombre);
     }
-    public void colocarNombreCurso(){
-        this.jt_NombreCurso.getText();
+      public void mostrarNombreCurso(String nombre)
+    {
+        this.jt_NombreCurso.setText(nombre);
     }
-     public void colocarNombreEstudiante(){
-          this.jt_NombreEstudiante.getText();
-     }
-    public String devolverCodigo(){
+      public String devolverCodigo(){
         return jt_CodigoMatricula.getText();
+    }
+        public String devolverCedula()
+    {
+        return this.jt_Cedula.getText();
     }
     public String devolverSigla()
     {
         return this.jt_Sigla.getText();
-    }
-   
-    public void mostrarNombreCurso(String nombre)
-    {
-        this.jt_NombreCurso.setText(nombre);
-    }
+    }     
     public void mostrarMensaje(String mensaje)
     {
         JOptionPane.showMessageDialog(null, mensaje);
     }        
- 
+     public void inhabilitarCedula(){
+         this.jt_Cedula.setEnabled(false);
+     }
+    
     public int getCantidadDeCursosMatriculados()
     {
         return modelo.getRowCount();
@@ -100,24 +111,6 @@ public class FRM_Matricula extends javax.swing.JFrame {
         
         return arreglo;
     }
-    public void eliminarTabla() {
-        int numeroFila = tbl_Matricula.getSelectedRow();
-
-        if (numeroFila < 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Debe seleccionar una fila de la tabla");
-
-        } else {
-            int confirmar = JOptionPane.showConfirmDialog(null,
-                    "Esta seguro que desea Eliminar el registro? ");
-            if (JOptionPane.OK_OPTION == confirmar) {
-                modelo.removeRow(numeroFila);
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");
-
-            }
-        }
-           
-    }
   
     public void resetearInterfaz()
     {
@@ -126,7 +119,9 @@ public class FRM_Matricula extends javax.swing.JFrame {
         this.jt_NombreEstudiante.setText("");
         this.jt_Sigla.setText("");
         this.jt_NombreCurso.setText("");
-        
+        //limpia tabla
+        modelo = (DefaultTableModel)tbl_Matricula.getModel();
+            tbl_Matricula.setModel(modelo);
         int tamanio=modelo.getRowCount();
         
         for(int contador=0;contador<tamanio;contador++)
@@ -134,15 +129,21 @@ public class FRM_Matricula extends javax.swing.JFrame {
             modelo.removeRow(0);
         }   
     }
+    public void soloLimpiaTabla(){
+          modelo = (DefaultTableModel)tbl_Matricula.getModel();
+            tbl_Matricula.setModel(modelo);
+        int tamanio=modelo.getRowCount();
+        
+        for(int contador=0;contador<tamanio;contador++)
+        {
+            modelo.removeRow(0);
+        }   
+    }            
     public void colocarCodigo()
     {
         this.jt_CodigoMatricula.setText(controlador.colocarCodigo());
     }
- //Controlador para el keypressed finalizar   
-     public void agregarControlador(Controlador_FRM_Matricula controlador)
-    {
-        this.controlador=controlador; 
-    }
+
 //Evento de los botones
         public void agregarEventos(Controlador_FRM_Matricula controlador)
     {
@@ -246,11 +247,6 @@ public class FRM_Matricula extends javax.swing.JFrame {
 
         btn_Finalizar.setText("Finalizar Matrícula");
         btn_Finalizar.setActionCommand("Finalizar Matricula");
-        btn_Finalizar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btn_FinalizarKeyPressed(evt);
-            }
-        });
         getContentPane().add(btn_Finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 140, 30));
 
         jl_Titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -265,18 +261,13 @@ public class FRM_Matricula extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_MatriculaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_MatriculaMousePressed
-      eliminarTabla();
+      controlador.eliminarTabla();
+      controlador.eliminarMatricula();
     }//GEN-LAST:event_tbl_MatriculaMousePressed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         controlador.agregarInformacionAlArchivo();
     }//GEN-LAST:event_formComponentHidden
-
-    private void btn_FinalizarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_FinalizarKeyPressed
-       if(evt.getKeyCode()==10){
-            controlador.finalizar();
-        }
-    }//GEN-LAST:event_btn_FinalizarKeyPressed
     
     
     /**
@@ -301,6 +292,6 @@ public class FRM_Matricula extends javax.swing.JFrame {
     private javax.swing.JTextField jt_NombreCurso;
     private javax.swing.JTextField jt_NombreEstudiante;
     private javax.swing.JTextField jt_Sigla;
-    private javax.swing.JTable tbl_Matricula;
+    public javax.swing.JTable tbl_Matricula;
     // End of variables declaration//GEN-END:variables
 }

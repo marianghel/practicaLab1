@@ -1,51 +1,70 @@
-
 package Vista;
 
 import Controlador.Controlador_FRM_Cursos;
+import Controlador.Controlador_FRM_MenuPrincipal;
 import javax.swing.JOptionPane;
 
 public class FRM_Cursos extends javax.swing.JFrame {
 
+    Controlador_FRM_MenuPrincipal controladorP;
     public Controlador_FRM_Cursos controlador_FRM_Cursos;
-    public FRM_Cursos() {
+
+    public FRM_Cursos(Controlador_FRM_MenuPrincipal controladorP) {
         initComponents();
-        setLocation(250,150);
-        controlador_FRM_Cursos = new Controlador_FRM_Cursos(this);
+        setLocationRelativeTo(null);
+        controlador_FRM_Cursos = new Controlador_FRM_Cursos(this, controladorP);
         gUI_Botones2.agregarEventos(controlador_FRM_Cursos);
-      this.gUI_InformacionCursos2.agregarControlador(controlador_FRM_Cursos);
+        this.gUI_InformacionCursos2.agregarControlador(controlador_FRM_Cursos);
         estadoInicial();
     }
 
-       public String[] devolverInformacion()
-    {
+    public String[] devolverInformacion() {
         return this.gUI_InformacionCursos2.devolverInformacion();
     }
-    public String devolverSigla(){
-          return this.gUI_InformacionCursos2.devolverSigla();
+
+    public String devolverSigla() {
+        return this.gUI_InformacionCursos2.devolverSigla();
     }
-       
-    public void mostrarInformacion(String arreglo[])
-    {
+
+    public String devolverNombre() {
+        return this.gUI_InformacionCursos2.devolverNombre();
+    }
+
+    public int devolverCreditos() {
+        return this.gUI_InformacionCursos2.devolverCreditos();
+    }
+
+    public String devolverHorario() {
+        return this.gUI_InformacionCursos2.devolverHorario();
+    }
+
+    public void mostrarInformacion(String arreglo[]) {
         this.gUI_InformacionCursos2.mostrarInformacion(arreglo);
     }
-     public void estadoInicial(){
+
+    public void estadoInicial() {
         this.gUI_InformacionCursos2.estadoInicial();
         this.gUI_Botones2.estadoInicial();
     }
-     public void mostrarMensaje(String mensaje){
-       JOptionPane.showMessageDialog(null,mensaje);
-   }
-    public void limpiarInterfaz(){
+
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    public void limpiarInterfaz() {
         this.gUI_InformacionCursos2.limpiarInterfaz();
     }
-    public void agregar(){
+
+    public void agregar() {
         this.gUI_InformacionCursos2.habilitarNoExiste();
         this.gUI_Botones2.habilitarAgregar();
     }
-    public void modificaElimina(){
+
+    public void modificaElimina() {
         this.gUI_Botones2.habilitarExistencia();
         this.gUI_InformacionCursos2.hablilitarSiExiste();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +90,7 @@ public class FRM_Cursos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-     controlador_FRM_Cursos.agregarInformacionAlArchivo();
+        controlador_FRM_Cursos.agregarInformacionAlArchivo();
     }//GEN-LAST:event_formComponentHidden
 
 

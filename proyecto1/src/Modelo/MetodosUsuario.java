@@ -51,8 +51,8 @@ public boolean buscarUsuario(String nombreUsuario){
     boolean usuarioExiste=false;
     for(int contador=0;contador<arrayUsuario.size();contador++){
         if(arrayUsuario.get(contador).getNombreUsuario().equals(nombreUsuario)){
-            arreglo[0]=arrayUsuario.get(contador).getNombreCompleto();
-            arreglo[1]=arrayUsuario.get(contador).getNombreUsuario();
+            arreglo[0]=arrayUsuario.get(contador).getNombreUsuario();
+            arreglo[1]=arrayUsuario.get(contador).getNombreCompleto();
             arreglo[2]=arrayUsuario.get(contador).getContrasena();
             arreglo[3]=arrayUsuario.get(contador).getTipo();
             usuarioExiste=true;
@@ -70,8 +70,8 @@ public void agregarUsuario(String informacion[]){
 }
 public void modificarUsuario(String arreglo[]){
     for(int contador=0;contador<arrayUsuario.size();contador++){
-        arrayUsuario.get(contador).setNombreCompleto(arreglo[0]);
-        arrayUsuario.get(contador).setNombreUsuario(arreglo[1]);
+        arrayUsuario.get(contador).setNombreUsuario(arreglo[0]);
+        arrayUsuario.get(contador).setNombreCompleto(arreglo[1]);
         arrayUsuario.get(contador).setContrasena(arreglo[2]);
         arrayUsuario.get(contador).setTipo(arreglo[3]);
     }

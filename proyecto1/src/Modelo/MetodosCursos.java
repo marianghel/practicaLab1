@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class MetodosCursos {
     
-    private ArrayList <Curso> arrayCursos;
-    String arregloInformacionConsultada[]=new String[3];
+    public ArrayList <Curso> arrayCursos;
+    String arregloInformacionConsultada[]=new String[4];
     
     public MetodosCursos()
     {
@@ -43,9 +43,10 @@ public class MetodosCursos {
         {
             if(arrayCursos.get(contador).getSiglas().equals(sigla))
             {
-                arregloInformacionConsultada[0]=arrayCursos.get(contador).getNombre();
-                arregloInformacionConsultada[1]=""+arrayCursos.get(contador).getCreditos();
-                arregloInformacionConsultada[2]=arrayCursos.get(contador).getHorario();
+                arregloInformacionConsultada[0]=arrayCursos.get(contador).getSiglas();
+                arregloInformacionConsultada[1]=arrayCursos.get(contador).getNombre();
+                arregloInformacionConsultada[2]=""+arrayCursos.get(contador).getCreditos();
+                arregloInformacionConsultada[3]=arrayCursos.get(contador).getHorario();
                 existe=true;
             }
         

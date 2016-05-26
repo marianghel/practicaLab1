@@ -30,12 +30,19 @@ public class GUI_InformacionEstudiantes extends javax.swing.JPanel {
     {
         return this.jt_Cedula.getText();
     }
+     public String devolverNombre()
+    {
+        return this.jt_NombreCompleto.getText();
+    }
+     public String devolverDireccion(){
+         return this.jt_Direccion.getText();
+     }
     public void mostrarInformacion(String arreglo[])
     {
-        this.jt_NombreCompleto.setText(arreglo[0]);
-        this.jt_Direccion.setText(arreglo[1]);
-        
+        this.jt_NombreCompleto.setText(arreglo[1]);
+        this.jt_Direccion.setText(arreglo[2]);
     }
+    
      public void agregarEventos(Controlador_FRM_Estudiantes controlador)
     {
         this.controlador=controlador;

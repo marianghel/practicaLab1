@@ -13,14 +13,20 @@ import java.util.ArrayList;
  */
 public class MetodosMatricula {
     
-    private ArrayList <Matricula> arrayMatricula;
+    public ArrayList <Matricula> arrayMatricula;
     String arregloInformacionConsultada[]=new String[2];
     
     public MetodosMatricula()
     {
-        arrayMatricula=new ArrayList <Matricula>();
+      arrayMatricula=new ArrayList <Matricula>();
         
     }
+      public void setArray(ArrayList <Matricula> array){
+     this.arrayMatricula= array;
+}
+    public ArrayList<Matricula> getArray(){
+    return  arrayMatricula;
+ }   
     public void agregarMatricula(String informacion[])
     {
         Matricula temporal=new Matricula(informacion[0], informacion[1], informacion[2]);
@@ -48,6 +54,14 @@ public class MetodosMatricula {
         }
         return existe;
     }
+       
+    
+     public String[] getArregloInformacion()
+    {
+        return this.arregloInformacionConsultada;
+    } 
+       
+     
     public void modificarMatricula(String arreglo[])
     {
         for(int contador=0;contador<arrayMatricula.size();contador++)
@@ -69,10 +83,7 @@ public class MetodosMatricula {
             }
         }
     }
-    public String[] getArregloInformacion()
-    {
-        return this.arregloInformacionConsultada;
-    } 
+   
     public String devolverCodigo()
     {
         String codigo= "";

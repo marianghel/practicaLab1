@@ -10,9 +10,10 @@ public class Usuario implements Serializable{
     private String contrasena;
     private String tipo;
 
-    public Usuario(String nombreCompleto, String nombreUsuario, String contrasena, String tipo) {
-        this.nombreCompleto = nombreCompleto;
+    public Usuario( String nombreUsuario,String nombreCompleto, String contrasena, String tipo) {
+        
         this.nombreUsuario = nombreUsuario;
+        this.nombreCompleto = nombreCompleto;
         this.contrasena = contrasena;
         this.tipo = tipo;
     } 

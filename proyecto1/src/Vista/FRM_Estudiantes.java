@@ -2,16 +2,19 @@
 package Vista;
 
 import Controlador.Controlador_FRM_Estudiantes;
+import Controlador.Controlador_FRM_MenuPrincipal;
 import javax.swing.JOptionPane;
 
 
 public class FRM_Estudiantes extends javax.swing.JFrame {
 public Controlador_FRM_Estudiantes controlador_FRM_Estudiantes;
+private Controlador_FRM_MenuPrincipal controladorP;
     
-    public FRM_Estudiantes() {
+    public FRM_Estudiantes(Controlador_FRM_MenuPrincipal controladorP) {
         initComponents();
-        setLocation(250,150);
-        controlador_FRM_Estudiantes=new Controlador_FRM_Estudiantes(this);
+        setLocationRelativeTo(null);
+        this.controladorP=controladorP;
+        controlador_FRM_Estudiantes=new Controlador_FRM_Estudiantes(this,controladorP);
         gUI_Botones1.agregarEventos(controlador_FRM_Estudiantes);
       this.gUI_InformacionEstudiantes1.agregarEventos(controlador_FRM_Estudiantes);
       this.gUI_InformacionEstudiantes1.agregarControlador(controlador_FRM_Estudiantes);
@@ -26,6 +29,12 @@ public Controlador_FRM_Estudiantes controlador_FRM_Estudiantes;
     {
         return this.gUI_InformacionEstudiantes1.devolverCedula();
     
+    }
+    public String devolverNombre(){
+        return this.gUI_InformacionEstudiantes1.devolverNombre();
+    }
+     public String devolverDireccion(){
+        return this.gUI_InformacionEstudiantes1.devolverDireccion();
     }
     public void mostrarInformacion(String arreglo[])
     {
@@ -84,6 +93,7 @@ public Controlador_FRM_Estudiantes controlador_FRM_Estudiantes;
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
        controlador_FRM_Estudiantes.agregarInformacionAlArchivo();
+       estadoInicial();
     }//GEN-LAST:event_formComponentHidden
 
    

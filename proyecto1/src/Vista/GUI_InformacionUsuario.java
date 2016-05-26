@@ -17,59 +17,83 @@ public class GUI_InformacionUsuario extends javax.swing.JPanel {
      * Creates new form GUI_InformacionUsuario
      */
     Controlador_FRM_Usuario controlador;
+
     public GUI_InformacionUsuario() {
         initComponents();
         cargarTipo();
     }
 
-    public void agregarControlador(Controlador_FRM_Usuario controlador)
-    {
-        this.controlador=controlador;
+    public void agregarControlador(Controlador_FRM_Usuario controlador) {
+        this.controlador = controlador;
+
+    }
+
+    public String[] devolverInformacion() {
+        String arreglo[];
+        arreglo = new String[4];
         
+        arreglo[0] = this.jt_NombreU.getText();
+        arreglo[1] = this.jt_NombreC.getText();
+        arreglo[2] = this.jt_Contrasena.getText();
+        arreglo[3] = "" + this.jcb_Tipo.getSelectedIndex();
+        return arreglo;
+    }
+
+    public void limpiarIntefaz() {
+        this.jt_NombreC.setText("");
+        this.jt_NombreU.setText("");
+        this.jt_Contrasena.setText("");
+    }
+
+    public void cargarTipo() {
+        this.jcb_Tipo.removeAllItems();
+        for (int contador = 0; contador < 1; contador++) {
+            this.jcb_Tipo.addItem("Administrador");
+            this.jcb_Tipo.addItem("Visitante");
         }
-    public String[] devolverInformacion(){
-    String arreglo[];
-    arreglo=new String[4];
-    arreglo[0]=this.jt_NombreC.getText();
-    arreglo[1]=this.jt_NombreU.getText();
-    arreglo[2]=this.jt_Contrasena.getText();
-    arreglo[3]=""+this.jcb_Tipo.getSelectedIndex();
-    return arreglo;
+        this.jcb_Tipo.setSelectedIndex(1);
     }
-public void limpiarIntefaz(){
-    this.jt_NombreC.setText("");
-    this.jt_NombreU.setText("");
-    this.jt_Contrasena.setText("");
-}
-public void cargarTipo(){
-    this.jcb_Tipo.removeAllItems();
-   for(int contador=0;contador<1;contador++){
-        this.jcb_Tipo.addItem("Administrador");
-        this.jcb_Tipo.addItem("Visitante");
+
+    public void mostrarInfo(String arreglo[]) {
+        this.jt_NombreU.setText(arreglo[0]);
+        this.jt_NombreC.setText(arreglo[1]);
+        this.jt_Contrasena.setText(arreglo[2]);
+        this.jcb_Tipo.setSelectedIndex(Integer.parseInt(arreglo[3]));
     }
-    this.jcb_Tipo.setSelectedIndex(1);
-}
-public void mostrarInfo(String arreglo[]){
-    this.jt_NombreC.setText(arreglo[0]);
-    this.jt_NombreU.setText(arreglo[1]);
-    this.jt_Contrasena.setText(arreglo[2]);
-    this.jcb_Tipo.setSelectedIndex(Integer.parseInt(arreglo[3]));
-}
-public String devolverNombreUsuario(){
-    return this.jt_NombreU.getText();
-}
-public void estadoInicial(){
-    this.jt_NombreC.setEnabled(false);
-    this.jt_NombreU.setEnabled(true);
-    this.jt_Contrasena.setEnabled(false);
-    this.jcb_Tipo.setEnabled(false);
-}
-public void habilitar(){
-    this.jt_NombreC.setEnabled(true);
-    this.jt_NombreU.setEnabled(true);
-    this.jt_Contrasena.setEnabled(true);
-    this.jcb_Tipo.setEnabled(true);
-}
+
+    public String devolverTipo() {
+        return ""+this.jcb_Tipo.getSelectedIndex();
+       }
+
+    public String devolverNombreUsuario() {
+        return this.jt_NombreU.getText();
+    }
+
+    public String devolverNombreC() {
+        return this.jt_NombreC.getText();
+    }
+
+    public String devolverContrasena() {
+        return this.jt_Contrasena.getText();
+    }
+
+    /*public String tipo(){
+    return this.jcb_Tipo.ge
+}*/
+    public void estadoInicial() {
+        this.jt_NombreC.setEnabled(false);
+        this.jt_NombreU.setEnabled(true);
+        this.jt_Contrasena.setEnabled(false);
+        this.jcb_Tipo.setEnabled(false);
+    }
+
+    public void habilitar() {
+        this.jt_NombreC.setEnabled(true);
+        this.jt_NombreU.setEnabled(true);
+        this.jt_Contrasena.setEnabled(true);
+        this.jcb_Tipo.setEnabled(true);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,7 +186,7 @@ public void habilitar(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jt_NombreUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_NombreUKeyPressed
-          if(evt.getKeyCode()==10){
+        if (evt.getKeyCode() == 10) {
             controlador.buscar();
         }
     }//GEN-LAST:event_jt_NombreUKeyPressed

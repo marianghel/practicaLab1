@@ -1,15 +1,19 @@
 
 package Vista;
 
+import Controlador.Controlador_FRM_MenuPrincipal;
 import Controlador.Controlador_FRM_Usuario;
+import javax.swing.JOptionPane;
 
 public class FRM_Usuario extends javax.swing.JFrame {
 
-    Controlador_FRM_Usuario controlador;
-    public FRM_Usuario() {
+    public Controlador_FRM_Usuario controlador;
+    Controlador_FRM_MenuPrincipal controladorP;
+    public FRM_Usuario(Controlador_FRM_MenuPrincipal controladorP) {
         initComponents();
-          setLocation(250,150);
-        controlador= new Controlador_FRM_Usuario(this);
+       setLocationRelativeTo(null);
+       this.controladorP=controladorP;
+       controlador= new Controlador_FRM_Usuario(this,controladorP);
        this.gUI_InformacionUsuario1.agregarControlador(controlador);
        this.gUI_Botones1.agregarEventos(controlador);
         estadoInicio();
@@ -21,6 +25,18 @@ public class FRM_Usuario extends javax.swing.JFrame {
     }
     public String devolverNombreU(){
       return  this.gUI_InformacionUsuario1.devolverNombreUsuario();
+    }
+        public String devolverContrasena(){
+        return this.gUI_InformacionUsuario1.devolverContrasena();
+    }
+        public String devolverNombreC(){
+            return this.gUI_InformacionUsuario1.devolverNombreC();
+        }
+    public String devolverTipo(){
+        return this.gUI_InformacionUsuario1.devolverTipo();
+    }
+    public String[] devolverInformacion() {
+         return this.gUI_InformacionUsuario1.devolverInformacion();
     }
 public void modificarEliminar(){
     this.gUI_Botones1.habilitarExistencia();
@@ -39,6 +55,10 @@ public void estadoInicio(){
     this.gUI_InformacionUsuario1.estadoInicial();
     this.gUI_Botones1.estadoInicial();
 }
+   public void mostrarMensaje(String mensaje)
+    {
+        JOptionPane.showMessageDialog(null,mensaje);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,15 +72,14 @@ public void estadoInicio(){
         gUI_Botones1 = new Vista.GUI_Botones();
         jl_Fondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 formComponentHidden(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(gUI_InformacionUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 437, 328));
-        getContentPane().add(gUI_Botones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
+        getContentPane().add(gUI_InformacionUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        getContentPane().add(gUI_Botones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, -1));
 
         jl_Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondoU.png"))); // NOI18N
         getContentPane().add(jl_Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -70,8 +89,7 @@ public void estadoInicio(){
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
            controlador.agregarInformacionCuandoCierraVentana();
-        //controladorP.cierreUsuario();
-        
+           controladorP.mostrarLogin();        
     }//GEN-LAST:event_formComponentHidden
 
  
