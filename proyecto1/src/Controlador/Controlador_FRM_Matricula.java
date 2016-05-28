@@ -71,7 +71,7 @@ public class Controlador_FRM_Matricula implements ActionListener {
             this.archivo.ingresarInfoAlArchivo(arrayTemporal.get(contador));
         }
     }
-
+//cargue el archivo plano cuando abre ventana
     public void cargaArchivoVentana() {
         ArrayList<Matricula> arrayCargaArchivo = archivo.devolverInformacionDelArchivo();
         metodosMatricula.setArray(arrayCargaArchivo);
@@ -127,7 +127,7 @@ public class Controlador_FRM_Matricula implements ActionListener {
         }
         agregar();
 
-//Botones--------------------------------------------------------
+//GUI_Botones--------------------------------------------------------
         if (e.getActionCommand().equals("Agregar")) {
             //Archivo plano//baseDatos//Xml. solo agrega a la tabla
 
@@ -148,7 +148,6 @@ public class Controlador_FRM_Matricula implements ActionListener {
                     frm_Matricula.soloLimpiaTabla();*/
                }
                 }
-            
         
         if (e.getActionCommand().equals("Finalizar Matricula")) {
             //Archivo plano
@@ -193,18 +192,9 @@ public class Controlador_FRM_Matricula implements ActionListener {
         }
         
         if (e.getActionCommand().equals("Eliminar")) {
-          //Archivo Plano
-        if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 1) {
             eliminarTabla();
             eliminarMatricula();
             frm_Matricula.resetearInterfaz();
-         }
-        //Base de datos
-        if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 2) {
-            eliminarTabla();
-            controladorP.conexion.eliminarMatricula(frm_Matricula.devolverCodigo());
-            frm_Matricula.resetearInterfaz();
-        }
         }
     }
     
@@ -264,6 +254,7 @@ public void agregar() {
         if (controladorP.conexion.consultarCurso(frm_Matricula.devolverSigla())) {
             String arregloCurso[] = controladorP.conexion.getArregloCurso();
             frm_Matricula.mostrarNombreCurso(arregloCurso[1]);
+            encontroCurso = true;
         } else {
             frm_Matricula.mostrarMensaje("El curso consultado no se encuentra registrado en la base de datos");
 
@@ -313,38 +304,42 @@ public void agregar() {
      
      }
      public void consultaMatriculaBaseDatos(){
-     if (controladorP.conexion.consultarMatricula(frm_Matricula.devolverCodigo())) {
+     if (controladorP.conexion.consultarMatricula(frm_Matricula.devolverCodigo())&&controladorP.conexion.consultarMatriculaDetallada(frm_Matricula.devolverCodigo())) {
+                    System.out.println("consulta base de datos matricula");
+                    //se llama arreglo matricula y arreglo detalle
                     String arregloMatricula[] = controladorP.conexion.devolverArregloMatricula();
-                    controladorP.conexion.consultarEstudiante(arregloMatricula[0]);
+                    String arregloDetalleMatricula[]= controladorP.conexion.devolverArregloDetalleMatricula();   
+                    //se le da la cedula de arregloMatricula y la sigla de arregloDetalle
+                    controladorP.conexion.consultarEstudiante(arregloMatricula[1]);
+                    controladorP.conexion.consultarCurso(arregloDetalleMatricula[1]);
+                    //se toma el nombre y el nombre curso
                     String arregloEstudiante[] = controladorP.conexion.getArreglo();
-                    controladorP.conexion.consultarCurso(arregloMatricula[1]);
                     String arregloCurso[] = controladorP.conexion.getArregloCurso();
                     frm_Matricula.mostrarNombreEstudiante(arregloEstudiante[1]);
                     frm_Matricula.mostrarNombreCurso(arregloCurso[1]);
                     frm_Matricula.modificarElimina();
                     //TABLA
-                    String cedula = "";
-                    String sigla = "";
                     String arregloTabla[] = new String[4];
-                    for (int contador = 0; contador < arrayMatricula.size(); contador++) {
-                        if (arrayMatricula.get(contador).getCodigo().equals(frm_Matricula.devolverCodigo())) {
-                            arregloTabla[0] = this.arrayMatricula.get(contador).getCedula();
-                            arregloTabla[2] = this.arrayMatricula.get(contador).getSigla();
-                            cedula = arregloTabla[0];
-                            sigla = arregloTabla[2];
-                        }
-                    }
-                    arregloTabla[0] = arregloMatricula[0];
-                    arregloTabla[1] = arregloEstudiante[1];
-                    arregloTabla[2] = arregloMatricula[1];
-                    arregloTabla[3] = arregloCurso[1];
+                    arregloTabla[0] = arregloMatricula[1];//cedula tabla matricula
+                    arregloTabla[1] = arregloEstudiante[1];//nombreEstuiante tabla estudiantes
+                    arregloTabla[2] = arregloDetalleMatricula[1];//sigla de tabla detalle_matricula
+                    arregloTabla[3] = arregloCurso[1];//nombreCurso de tabla curso
+                    
                     modelo.addRow(arregloTabla);
                     frm_Matricula.tbl_Matricula.setModel(modelo);
+                    
+                    frm_Matricula.modificarElimina();
+                    frm_Matricula.mostrarMensaje("Matricula encontrada en la base de datos");
+                }else{
+                    frm_Matricula.estadoInicial();
+                    frm_Matricula.mostrarMensaje("Matricula no encontrada en el archivo plano");
                 }
-                frm_Matricula.resetearInterfaz(); 
+               
      }
 //FINALIZAR---------------------------------------------------------------------
-    public void finalizarArchivosPlanos() {
+    
+     
+     public void finalizarArchivosPlanos() {
         for (int contador = 0; contador < frm_Matricula.getCantidadDeCursosMatriculados(); contador++) {
             metodosMatricula.agregarMatricula(frm_Matricula.getInformacionTabla(contador));
         }
@@ -352,14 +347,13 @@ public void agregar() {
         metodosMatricula.mostrarInformacion();
         frm_Matricula.mostrarMensaje("Finalizó matricula archivo plano");
 
-        //habilitarAgregar();
     }
     
     public void finalizarBaseDatos(){
          for (int contador = 0; contador < frm_Matricula.getCantidadDeCursosMatriculados(); contador++) {
-                    String arregloMatricula[] = frm_Matricula.getInformacionTabla(contador);
-                    controladorP.conexion.registrarMatricula(arregloMatricula[0], arregloMatricula[1]);
-                    controladorP.conexion.registrarMatriculaDetallada(arregloMatricula[0], arregloMatricula[2]);
+                                       
+                    controladorP.conexion.registrarMatricula(frm_Matricula.getInformacionTablaMatricula(contador));
+                    controladorP.conexion.registrarDetalleMatricula(frm_Matricula.getInformacionTablaDetalleMatricula(contador));
                 }
                 frm_Matricula.resetearInterfaz();
                 metodosMatricula.mostrarInformacion();
@@ -375,6 +369,7 @@ public void agregar() {
             //Base de datos
             if (controladorP.mantenimientoFuente.devolverOpcionFuente() == 2) {
                 controladorP.conexion.eliminarMatricula(frm_Matricula.devolverCodigo());
+                controladorP.conexion.eliminarMatriculaDetallada(frm_Matricula.devolverCodigo());
                 frm_Matricula.resetearInterfaz();
             }
             //XML
